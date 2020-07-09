@@ -12,7 +12,9 @@ module.exports = {
 
     },
     create(req, res){
-        return res.render('members/create')
+        Member.instructorsSelectOptions(function(options){
+            return res.render('members/create', { instructorOptions: options })
+        })
 
     },
     post(req, res){
