@@ -8,13 +8,33 @@ for (item of menuItems){
     }
 }
 
+//Paginação
+let totalPages = 20,
+    selectedPage = 15,
+    pages = [],
+    oldPage,
+    pageAfterBefore = 2
 
-//Confirmação de delete
-const formDelete = document.querySelector("#form-delete")
-formDelete.addEventListener("submit", function(event) {
-    const confirmation = confirm("Deseja Deletar?")
-    
-    if(!confirmation) {
-        event.preventDefault()
+for(let currentPage = 1; currentPage <= totalPages; currentPage++){
+
+    const firstAndLastPage = currentPage == 1 || currentPage == totalPages
+    const pagesAfterSelectedPage = currentPage <= selectedPage + pageAfterBefore
+    const pagesBeforeSelected = currentPage >= selectedPage - pageAfterBefore
+
+    if(firstAndLastPage || pagesBeforeSelected && pagesAfterSelectedPage) {
+        if(oldPage && currentPage - oldPage > pageAfterBefore){
+            pages.push("...")
+        }        
+        
+        if(oldPage && currentPage - oldPage == pageAfterBefore){
+            // pages.push(currentPage - 1)
+            pages.push(oldPage + 1)
+        }
+
+        pages.push(currentPage)
+
+        oldPage = currentPage
     }
-})
+}
+
+console.log(pages)
