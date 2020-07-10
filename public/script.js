@@ -9,7 +9,7 @@ for (item of menuItems){
 }
 
 //Paginação
-function pagination(selectedPage, totalPages){
+function paginate(selectedPage, totalPages){
     let pages = [],
     oldPage,
     pageAfterBefore = 2
@@ -38,3 +38,10 @@ function pagination(selectedPage, totalPages){
 
     return pages
 }
+
+const pagination = document.querySelector(".pagination")
+const page = +pagination.dataset.page
+const total = +pagination.dataset.total
+const pages = paginate(page, total)
+
+console.log(pages)
